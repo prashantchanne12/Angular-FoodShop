@@ -8,19 +8,22 @@
         <div class="input-wrapper">
             <mat-form-field appearance="outline">
                 <mat-label>Username</mat-label>
-                <input matInput placeholder="Username" required>
+                <input autofocus matInput placeholder="Username" required [formControl]="userName">
                 <mat-hint>should be between 2 to 10</mat-hint>
+                <mat-error *ngIf="userName.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field style="padding-top: 1.4rem;" appearance="outline">
                 <mat-label>Password</mat-label>
-                <input type="password" matInput placeholder="Username" required>
+                <input type="password" matInput [formControl]="password" placeholder="Password" required>
                 <mat-hint>should be between 2 to 10</mat-hint>
+                <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
             </mat-form-field>
         </div>
         <div class="button-wrapper">
-            <button color="primary" mat-raised-button>Login</button>
-            <button color="primary" mat-stroked-button>Create account</button>
-
+            <button [disabled]="userName.invalid || password.invalid" color="primary" mat-raised-button
+                (click)="login()">Login</button>
+            <button [disabled]="userName.invalid || password.invalid" color="primary" mat-stroked-button
+                (click)="create()">Create account</button>
         </div>
     </div>
 </div>
