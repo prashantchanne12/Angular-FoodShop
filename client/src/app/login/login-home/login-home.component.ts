@@ -30,6 +30,9 @@ export class LoginHomeComponent implements OnInit {
     if (this.userName.hasError('invalidUserPass')) {
       return 'Invalid username or password';
     }
+    if (this.userName.hasError('usernameExist')) {
+      return 'Username already taken';
+    }
 
     return this.userName.hasError('minlength')
       ? 'Minmimum length should be 2'
@@ -81,7 +84,42 @@ export class LoginHomeComponent implements OnInit {
     }
   }
 
-  create() {}
+  create() {
+    if (!this.userName.value || !this.password.value) return;
+
+    const users = localStorage.getItem('food-shop-users');
+
+    if (!users) {
+      localStorage.setItem(
+        'food-shop-users',
+        JSON.stringify([
+          { username: this.userName.value, password: this.password.value },
+        ])
+      );
+      this.route.navigate(['']);
+    } else {
+      const parsedUsers: { username: string; password: string }[] =
+        JSON.parse(users);
+
+      const isUsernameExist = parsedUsers.find(
+        (item) => item.username === this.userName.value
+      );
+
+      if (isUsernameExist) {
+        this.userName.setErrors({ usernameExist: true });
+        return;
+      } else {
+        localStorage.setItem(
+          'food-shop-users',
+          JSON.stringify([
+            ...parsedUsers,
+            { username: this.userName.value, password: this.password.value },
+          ])
+        );
+        this.route.navigate(['']);
+      }
+    }
+  }
 
   ngOnInit(): void {}
 }
