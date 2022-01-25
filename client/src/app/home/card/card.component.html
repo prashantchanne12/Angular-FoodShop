@@ -1,0 +1,17 @@
+<mat-card class="card">
+    <img [src]="food.imgUrl" class="card-img">
+    <div class="content">
+        <h2>{{food.name}}</h2>
+        <p class="price">₹ {{food.price}}</p>
+        <mat-chip-list>
+            <mat-chip *ngFor="let c of food.category" class="mat-chip" color="primary" selected>{{c}}</mat-chip>
+        </mat-chip-list>
+        <mat-card-subtitle style="padding-top: 15px;">Pizza hand tossed, with extra cheeze and sauce
+        </mat-card-subtitle>
+    </div>
+    <div class="add-btn">
+        <button color="primary" mat-stroked-button>
+            Add
+        </button>
+    </div>
+</mat-card>

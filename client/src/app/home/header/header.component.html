@@ -1,0 +1,20 @@
+<mat-toolbar style="position: sticky; top: 0; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; z-index: 100;"
+    color="primary">
+    <div class="navbar-wrapper container">
+        <span>FoodShop</span>
+        <div class="buttons">
+            <button mat-icon-button>
+                <mat-icon>home</mat-icon>
+            </button>
+            <button mat-icon-button>
+                <mat-icon>shopping_cart</mat-icon>
+            </button>
+            <div routerLink="/login" class="btn" *ngIf="!isUser" mat-icon-button>
+                Login
+            </div>
+            <div (click)="onLogout()" class="btn" *ngIf="isUser" mat-icon-button>
+                Logout
+            </div>
+        </div>
+    </div>
+</mat-toolbar>

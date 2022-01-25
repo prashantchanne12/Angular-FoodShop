@@ -1,0 +1,21 @@
+<div class="container">
+
+    <!-- carousel -->
+    <!-- <div class="carousel-wrapper">
+        <carousel class="carousel" style="z-index: -50;" [images]="imagesForSlider" [objectFit]="'cover'"
+            [cellWidth]="'100%'" [height]="350" [autoplay]="true" [dots]="true" [loop]="true" [arrows]="false">
+        </carousel>
+    </div> -->
+
+    <!-- title -->
+    <div class="fresh-food">
+        <h2>Order fresh food</h2>
+        <img src="assets/carrot.svg" />
+    </div>
+
+    <!-- cards -->
+    <app-card *ngFor="let food of foods" [food]="food"></app-card>
+
+
+
+</div>

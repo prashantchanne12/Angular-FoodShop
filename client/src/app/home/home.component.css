@@ -1,0 +1,60 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 1px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content .price {
+  font-size: 1rem;
+  margin-top: -10px;
+}
+
+.card-img {
+  height: 150px;
+  width: 180px;
+  object-fit: cover;
+}
+
+.fresh-food {
+  display: flex;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.fresh-food p {
+  font-weight: 500;
+}
+
+.fresh-food img {
+  width: 35px;
+  height: 35px;
+  margin-bottom: 19px;
+  padding-left: 5px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.card div {
+  padding-left: 1.5rem;
+}
+
+.mat-chip {
+  font-size: 13px;
+}
+
+.add-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
