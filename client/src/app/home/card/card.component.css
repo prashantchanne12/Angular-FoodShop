@@ -52,3 +52,20 @@
   top: 1rem;
   right: 1rem;
 }
+
+.btn-plus {
+  font-size: 1.1rem;
+}
+
+.btn-minus {
+  font-size: 1.5rem;
+}
+
+.qty {
+  font-weight: 500;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+}

@@ -18,6 +18,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CartService } from './service/cart.service';
 import { CartLocalService } from './service/cart.local.service';
 import { FoodService } from './service/foods.service';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { FoodService } from './service/foods.service';
     IvyCarouselModule,
     MatCardModule,
     MatChipsModule,
+    MatBadgeModule,
+    MatSnackBarModule,
   ],
   providers: [CartService, CartLocalService, FoodService],
   bootstrap: [AppComponent],

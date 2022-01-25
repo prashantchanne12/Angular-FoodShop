@@ -9,9 +9,14 @@
         <mat-card-subtitle style="padding-top: 15px;">Pizza hand tossed, with extra cheeze and sauce
         </mat-card-subtitle>
     </div>
-    <div class="add-btn">
-        <button color="primary" mat-stroked-button>
+    <div *ngIf="!addedToCart" class="add-btn">
+        <button (click)="onAddToCart(food)" color="primary" mat-stroked-button>
             Add
         </button>
+    </div>
+    <div *ngIf="addedToCart" class="add-btn counter">
+        <button mat-button color="primary" class="btn-plus" (click)="onQuantityAdd()">+</button>
+        <span class="qty">{{quantity}}</span>
+        <button mat-button color="primary" class="btn-minus" (click)="onQuantityRemove()">-</button>
     </div>
 </mat-card>
