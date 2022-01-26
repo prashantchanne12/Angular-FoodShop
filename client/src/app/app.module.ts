@@ -20,6 +20,7 @@ import { CartLocalService } from './service/cart.local.service';
 import { FoodService } from './service/foods.service';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { OrdersService } from './service/orders.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatBadgeModule,
     MatSnackBarModule,
   ],
-  providers: [CartService, CartLocalService, FoodService],
+  providers: [CartService, CartLocalService, FoodService, OrdersService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

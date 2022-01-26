@@ -1,0 +1,28 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.add-1 .add-2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-address {
+  width: 400px;
+}
+
+.radio {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio .r-btn {
+  padding-top: 1rem;
+}

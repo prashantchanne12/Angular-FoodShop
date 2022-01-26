@@ -1,0 +1,47 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+header {
+  margin-top: 1rem;
+}
+
+table {
+  width: 100%;
+}
+
+.product {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.product img {
+  height: 130px;
+  width: 180px;
+}
+
+.product .product-desc {
+  display: flex;
+  flex-direction: column;
+  padding-left: 14px;
+}
+
+.product .product-desc h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.product .product-desc p {
+  color: gray;
+}
+
+.qty {
+  margin-right: 10rem;
+  margin-left: 1.1rem;
+}
+
+.price {
+  font-weight: 500;
+}

@@ -1,1 +1,62 @@
-<p>checkout-home works!</p>
+<div class="container">
+    <mat-stepper linear #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <ng-template matStepLabel>Contact</ng-template>
+            <form [formGroup]="firstFormGroup" class="form">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input autofocus matInput formControlName="firstName" placeholder="First Name" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input formControlName="lastName" matInput placeholder="First Name" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Mobile</mat-label>
+                    <input type="number" formControlName="mobile" matInput placeholder="First Name" required>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <ng-template matStepLabel>Address</ng-template>
+            <form [formGroup]="secondFormGroup" class="form form-address">
+                <mat-form-field appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <textarea autofocus matInput placeholder="room no., building" formControlName="address"
+                        required></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Street</mat-label>
+                    <input matInput placeholder="street, area">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Locality</mat-label>
+                    <input matInput placeholder="ex.new mumbai" formControlName="locality" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Pincode</mat-label>
+                    <input type="number" matInput placeholder="pincode" formControlName="pincode" required>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Place order</ng-template>
+            <div>
+                <h2 style="padding-top: 1rem;">Payment Option</h2>
+                <mat-radio-group color="primary" aria-label="Select an option" class="radio">
+                    <mat-radio-button value="1" disabled class="r-btn">Online Banking</mat-radio-button>
+                    <mat-radio-button value="2" disabled class="r-btn">UPI</mat-radio-button>
+                    <mat-radio-button value="3" [checked]="true" class="r-btn">Cash On Delivery</mat-radio-button>
+                </mat-radio-group>
+                <button style="margin-top: 2rem;" mat-raised-button color="primary" (click)="onPlaceOrder()">Place your order</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>

@@ -27,4 +27,8 @@ export class CartLocalService {
     }
     return null;
   }
+
+  emptyCartLocal() {
+    localStorage.removeItem('cartItems');
+  }
 }

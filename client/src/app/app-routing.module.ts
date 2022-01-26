@@ -18,6 +18,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./checkout/checkout.module').then((m) => m.CheckoutModule),
   },
+  {
+    path: 'orders',
+    loadChildren: () =>
+      import('./orders/orders.module').then((m) => m.OrdersModule),
+  },
   { path: '', component: HomeComponent },
   { path: '**', component: NotFoundComponent },
 ];

@@ -46,4 +46,9 @@ export class CartService {
   getCartCount(): number {
     return this.cart.length;
   }
+
+  emptyCart() {
+    this.cart = [];
+    this.cartLocalService.emptyCartLocal();
+  }
 }

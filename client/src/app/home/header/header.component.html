@@ -9,12 +9,16 @@
                 [matBadgeHidden]="cartService.getCartCount() === 0" matBadgeColor="warn" matBadgeOverlap="true">
                 <mat-icon>shopping_cart</mat-icon>
             </button>
-            <div routerLink="/login" class="btn" *ngIf="!isUser" mat-icon-button>
+            <button color="primary" routerLink="/orders" *ngIf="isUser" class="btn" mat-flat-button>
+                Orders
+            </button>
+            <button color="primary" routerLink="/login" class="btn" *ngIf="!isUser" mat-flat-button>
                 Login
-            </div>
-            <div (click)="onLogout()" class="btn" *ngIf="isUser" mat-icon-button>
+            </button>
+            <button color="primary" (click)="onLogout()" class="btn" style="margin-left: -1.2rem;" *ngIf="isUser"
+                mat-flat-button>
                 Logout
-            </div>
+            </button>
         </div>
     </div>
 </mat-toolbar>
