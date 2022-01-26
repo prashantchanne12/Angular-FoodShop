@@ -10,9 +10,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CartHomeComponent implements OnInit {
   displayedColumns: string[] = ['name', 'quantity', 'price', 'remove'];
   subtotal = 0;
+  currentUser = false;
 
   constructor(public cartService: CartService, private _snackBar: MatSnackBar) {
     this.getNewSubtotal();
+    const user = localStorage.getItem('current-food-shop-user');
+
+    if (user) {
+      this.currentUser = true;
+    }
   }
 
   ngOnInit(): void {}

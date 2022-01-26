@@ -4,7 +4,7 @@ export class OrdersService {
   constructor() {
     //   get local orders
     const orders = localStorage.getItem('orders');
-    if (orders) {
+    if (orders && this.orders.length === 0) {
       this.orders = JSON.parse(orders);
     }
   }
@@ -22,7 +22,7 @@ export class OrdersService {
     } else {
       const ordersLocalParsed = JSON.parse(ordersLocal);
 
-      const newOrders = [...ordersLocalParsed, ...this.orders];
+      const newOrders = [...ordersLocalParsed, ...orders];
 
       localStorage.setItem('orders', JSON.stringify(newOrders));
     }

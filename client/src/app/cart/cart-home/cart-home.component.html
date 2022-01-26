@@ -71,8 +71,13 @@
                     <p *ngIf="subtotal === 0">0</p>
                 </div>
             </div>
-            <button routerLink="/checkout" [disabled]="subtotal === 0" mat-raised-button color="primary">Proceed to
+            <button routerLink="/checkout" [disabled]="subtotal === 0 || !currentUser" mat-raised-button
+                color="primary">Proceed to
                 checkout</button>
+            <div style="padding-top: 1rem;">
+                <a routerLink="/login" *ngIf="!currentUser" style="color: red; font-size: 13px; ">*Login
+                    to checkout</a>
+            </div>
         </div>
     </div>
 </div>

@@ -7,7 +7,9 @@
     <table mat-table [dataSource]="ordersService.orders" class="mat-elevation-z2">
         <ng-container matColumnDef="position">
             <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            <td mat-cell *matCellDef="let element; let i = index">
+                <span style="color: gray;">{{i+1}}</span>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
