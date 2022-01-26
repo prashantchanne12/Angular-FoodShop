@@ -9,6 +9,7 @@ export interface CartItem {
   price: number;
   quantity: number;
   category: string[];
+  total: number;
 }
 
 @Injectable()
@@ -32,12 +33,9 @@ export class CartService {
       this.cartLocalService.addCartItemToLocalStorage(item);
     } else {
       this.cart[index].quantity = item.quantity;
+      this.cart[index].total = item.quantity * this.cart[index].price;
       this.cartLocalService.setNewCart(this.cart);
     }
-
-    setTimeout(() => {
-      this.addedToCart = false;
-    }, 1000);
   }
 
   removeFromCart(item: CartItem) {

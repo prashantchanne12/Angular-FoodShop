@@ -16,6 +16,7 @@ export class CardComponent implements OnInit {
     price: 0,
     desc: '',
     category: [''],
+    total: 0,
   };
 
   addedToCart = false;
@@ -28,6 +29,7 @@ export class CardComponent implements OnInit {
     price: 0,
     desc: '',
     category: [''],
+    total: 0,
   };
   durationInSeconds = 5;
 
@@ -38,7 +40,7 @@ export class CardComponent implements OnInit {
 
   onAddToCart(item: CartItem) {
     this.addedToCart = true;
-    this._snackBar.open(`✅ ${this.food.name} added to bag `, '', {
+    this._snackBar.open(`${this.food.name} added to bag ✅`, '', {
       duration: 3000,
     });
 

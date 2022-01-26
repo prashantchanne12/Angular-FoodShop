@@ -1,12 +1,11 @@
-<mat-toolbar style="position: sticky; top: 0; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; z-index: 100;"
-    color="primary">
+<mat-toolbar class="mat-elevation-z2" style="position: sticky; top: 0; z-index: 100;" color="primary">
     <div class="navbar-wrapper container">
-        <span>FoodShop</span>
+        <span routerLink="" style="cursor: pointer;">FoodShop</span>
         <div class="buttons">
-            <button mat-icon-button>
+            <button routerLink="" mat-icon-button>
                 <mat-icon>home</mat-icon>
             </button>
-            <button mat-icon-button matBadge={{cartService.getCartCount()}}
+            <button routerLink="/cart" mat-icon-button matBadge={{cartService.getCartCount()}}
                 [matBadgeHidden]="cartService.getCartCount() === 0" matBadgeColor="warn" matBadgeOverlap="true">
                 <mat-icon>shopping_cart</mat-icon>
             </button>

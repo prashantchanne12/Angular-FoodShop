@@ -1,0 +1,87 @@
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+header h1 {
+  text-align: center;
+  margin-top: 2rem;
+}
+table {
+  width: 100%;
+}
+
+.product {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.product img {
+  height: 130px;
+  width: 180px;
+}
+
+.product .product-desc {
+  display: flex;
+  flex-direction: column;
+  padding-left: 14px;
+}
+
+.product .product-desc h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.product .product-desc p {
+  color: gray;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-left: -2.2rem;
+}
+
+.price {
+  font-weight: 500;
+}
+
+.delete-icon {
+  color: #eb4d4b;
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 2rem;
+}
+
+.bill-section {
+  padding: 1.2rem;
+  text-align: center;
+  width: 250px;
+  position: fixed;
+  right: 8rem;
+  background-color: #ecf0f1;
+  border-radius: 5px;
+}
+
+.bill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: gray;
+}
+
+.bill-total {
+  margin-top: 8px;
+  color: black;
+}
+
+.bill-total p {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
