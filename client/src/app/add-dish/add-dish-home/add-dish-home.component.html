@@ -1,0 +1,53 @@
+<div class="container">
+
+    <div class="grid-container">
+        <div class="form-wrapper">
+            <h1>New dish</h1>
+            <div class="input-wrapper">
+                <mat-form-field appearance="outline">
+                    <mat-label>Dish name</mat-label>
+                    <input autofocus matInput placeholder="ex. pizza" required [formControl]="name">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Dish image URL</mat-label>
+                    <input autofocus matInput placeholder="add a image URL" required [formControl]="image">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput placeholder="description" required [formControl]="description"></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Category</mat-label>
+                    <mat-select required [formControl]="category">
+                        <mat-option *ngFor="let food of categories" [value]="food.value">
+                            {{food.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Price ₹</mat-label>
+                    <input type="number" autofocus matInput placeholder="₹" required [formControl]="price" />
+                </mat-form-field>
+                <button style="padding: 3px;" mat-raised-button color="primary">ADD NEW DISH</button>
+            </div>
+        </div>
+        <div>
+            <h1 style="color: blueviolet;">Preview</h1>
+            <mat-card *ngIf="name.value || category.value || price.value || description.value || image.value"
+                class="preview-wrapper">
+                <div class="image-container">
+                    <img *ngIf="image.value" [src]="image.value" class="image" />
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <h2 class="dish-name">{{name.value}}</h2>
+                    <mat-chip-list *ngIf="category.value">
+                        <mat-chip color="primary" selected style="margin-left: 1rem;">{{category.value}}
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+                <h3 style="color:gray">{{description.value}}</h3>
+                <h3 *ngIf="price.value > 0" style="font-weight: 500; font-size: 1.1rem;">₹ {{price.value}}</h3>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -23,6 +23,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./orders/orders.module').then((m) => m.OrdersModule),
   },
+  {
+    path: 'add',
+    loadChildren: () =>
+      import('./add-dish/add-dish.module').then((m) => m.AddDishModule),
+  },
   { path: '', component: HomeComponent },
   { path: '**', component: NotFoundComponent },
 ];

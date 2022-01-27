@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from '../service/cart.service';
 import { FoodService } from '../service/foods.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,10 @@ export class HomeComponent implements OnInit {
     { path: 'assets/food-3.jpg' },
   ];
 
-  constructor(private foodService: FoodService) {
+  constructor(
+    private foodService: FoodService,
+    public userService: UserService
+  ) {
     this.foods = foodService.foods;
   }
 

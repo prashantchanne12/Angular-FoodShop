@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-login-home',
@@ -20,7 +21,7 @@ export class LoginHomeComponent implements OnInit {
   ]);
   error = '';
 
-  constructor(private route: Router) {}
+  constructor(private route: Router, private userService: UserService) {}
 
   getErrorMessage() {
     if (this.userName.hasError('required')) {
@@ -52,6 +53,8 @@ export class LoginHomeComponent implements OnInit {
   login() {
     if (!this.userName.value || !this.password.value) return;
 
+    this.checkAdminLogin();
+
     const users = localStorage.getItem('food-shop-users') || '';
 
     if (!users) {
@@ -81,6 +84,20 @@ export class LoginHomeComponent implements OnInit {
         console.log('login success!');
         this.route.navigate(['']);
       }
+    }
+  }
+
+  checkAdminLogin() {
+    if (this.userName.value === 'admin' && this.password.value === 'admin') {
+      this.userService.setIsAdmin(true);
+      localStorage.setItem(
+        'current-food-shop-user',
+        JSON.stringify({
+          username: this.userName.value,
+          password: this.password.value,
+        })
+      );
+      this.route.navigate(['']);
     }
   }
 

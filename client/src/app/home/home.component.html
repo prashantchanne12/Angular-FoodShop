@@ -9,12 +9,13 @@
 
     <!-- title -->
     <div class="fresh-food">
-        <h2>Order fresh food</h2>
-        <img src="assets/carrot.svg" />
+        <h2 *ngIf="!userService.getIsAdmin()">Order fresh food</h2>
+        <h2 *ngIf="userService.getIsAdmin()">Your dishes 🍕</h2>
+        <img *ngIf="!userService.getIsAdmin()" src="assets/carrot.svg" />
     </div>
 
     <!-- cards -->
-    <app-card *ngFor="let food of foods" [food]="food"></app-card>
+    <app-card *ngFor="let food of foods" [food]="food" [isAdmin]="userService.getIsAdmin()"></app-card>
 
 
 

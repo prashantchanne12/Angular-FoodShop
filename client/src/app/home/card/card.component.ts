@@ -18,6 +18,7 @@ export class CardComponent implements OnInit {
     category: [''],
     total: 0,
   };
+  @Input() isAdmin: boolean = false;
 
   addedToCart = false;
   quantity = 0;

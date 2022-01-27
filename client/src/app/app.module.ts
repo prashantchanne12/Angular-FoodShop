@@ -21,6 +21,7 @@ import { FoodService } from './service/foods.service';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { OrdersService } from './service/orders.service';
+import { UserService } from './service/user.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,13 @@ import { OrdersService } from './service/orders.service';
     MatBadgeModule,
     MatSnackBarModule,
   ],
-  providers: [CartService, CartLocalService, FoodService, OrdersService],
+  providers: [
+    CartService,
+    CartLocalService,
+    FoodService,
+    OrdersService,
+    UserService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
