@@ -1,22 +1,59 @@
-export class UserService {
-  private isAdmin = false;
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-  constructor() {
-    // check if the curretuser is admin
-    const currentUser = localStorage.getItem('current-food-shop-user');
-    if (currentUser) {
-      const parsedUser = JSON.parse(currentUser);
-      if (parsedUser.username === 'admin' && parsedUser.password === 'admin') {
-        this.isAdmin = true;
-      }
-    }
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
+};
+
+export interface User {
+  id: number;
+  username: string;
+  password: string;
+  isAdmin: number;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class UserService {
+  private apiUrl = 'http://localhost:5000/users';
+  private currentUser = 'http://localhost:5000/curentUser';
+
+  constructor(private http: HttpClient) {}
+
+  login(user: User): Observable<User> {
+    return this.http.post<User>(this.currentUser, user, httpOptions);
   }
 
-  setIsAdmin(val: boolean) {
-    this.isAdmin = val;
+  logout(): Observable<User> {
+    return this.http.delete<User>(this.currentUser);
+  }
+
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(this.apiUrl, user, httpOptions);
+  }
+
+  getCurrentUser(): Observable<User> {
+    return this.http.get<User>(this.currentUser);
+  }
+
+  getUserWithUsername(username: string) {
+    const url = `${this.apiUrl}?username=${username}`;
+    return this.http.get<User[]>(url);
+  }
+
+  getUsernameWithPassword(username: string, password: string) {
+    const url = `${this.apiUrl}?username=${username}&password=${password}`;
+    return this.http.get<User[]>(url);
   }
 
   getIsAdmin() {
-    return this.isAdmin;
+    if (!this.getCurrentUser()) {
+      return false;
+    }
+    return true;
   }
 }

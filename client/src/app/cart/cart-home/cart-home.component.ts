@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartItem, CartService } from '../../service/cart.service';
+import { Food, CartService } from '../../service/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -23,13 +23,13 @@ export class CartHomeComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onQuantityAdd(item: CartItem) {
+  onQuantityAdd(item: Food) {
     item.quantity += 1;
     this.cartService.addToCart(item);
     this.getNewSubtotal();
   }
 
-  onQuantityRemove(item: CartItem) {
+  onQuantityRemove(item: Food) {
     item.quantity -= 1;
 
     if (item.quantity === 0) {
@@ -45,7 +45,7 @@ export class CartHomeComponent implements OnInit {
     this.getNewSubtotal();
   }
 
-  onItemRemove(item: CartItem) {
+  onItemRemove(item: Food) {
     this.cartService.removeFromCart(item);
     this.getNewSubtotal();
     this._snackBar.open(`${item.name} removed from bag`, '', {

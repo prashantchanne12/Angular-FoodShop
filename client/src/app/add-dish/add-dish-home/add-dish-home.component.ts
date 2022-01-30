@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-dish-home',
@@ -19,9 +20,19 @@ export class AddDishHomeComponent implements OnInit {
   image = new FormControl('', [Validators.required]);
   description = new FormControl('', [Validators.required]);
   category = new FormControl('', [Validators.required]);
-  price = new FormControl(0, [Validators.required]);
+  price = new FormControl(0, [Validators.required, Validators.min(1)]);
+  // edit = false;
+  // id = 0;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.route.queryParams.subscribe((params) => {
+    //   if (params.edit && params.id) {
+    //     this.edit = params.edit;
+    //     this.id = params.id;
+    //   }
+    //   console.log(this.edit, this.id);
+    // });
+  }
 }

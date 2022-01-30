@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/service/user.service';
+import { User, UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-login-home',
@@ -20,6 +20,7 @@ export class LoginHomeComponent implements OnInit {
     Validators.maxLength(10),
   ]);
   error = '';
+  users: User[] = [];
 
   constructor(private route: Router, private userService: UserService) {}
 
@@ -55,86 +56,55 @@ export class LoginHomeComponent implements OnInit {
 
     this.checkAdminLogin();
 
-    const users = localStorage.getItem('food-shop-users') || '';
-
-    if (!users) {
-      this.userName.setErrors({ invalidUserPass: true });
-      return;
-    }
-
-    const parsedUsers: { username: string; password: string }[] =
-      JSON.parse(users);
-
-    const user = parsedUsers.find(
-      (item) => item.username === this.userName.value
-    );
-
-    if (!user) {
-      this.userName.setErrors({ invalidUserPass: true });
-      return;
-    } else {
-      if (user.password === this.password.value) {
-        localStorage.setItem(
-          'current-food-shop-user',
-          JSON.stringify({
-            username: this.userName.value,
-            password: this.password.value,
-          })
-        );
-        console.log('login success!');
-        this.route.navigate(['']);
-      }
-    }
-  }
-
-  checkAdminLogin() {
-    if (this.userName.value === 'admin' && this.password.value === 'admin') {
-      this.userService.setIsAdmin(true);
-      localStorage.setItem(
-        'current-food-shop-user',
-        JSON.stringify({
-          username: this.userName.value,
-          password: this.password.value,
-        })
-      );
-      this.route.navigate(['']);
-    }
+    this.userService
+      .getUsernameWithPassword(this.userName.value, this.password.value)
+      .subscribe((user) => {
+        if (user.length === 1) {
+          this.userService.login(user[0]).subscribe(() => {
+            this.route.navigate(['']);
+          });
+        } else {
+          this.userName.setErrors({ invalidUserPass: true });
+        }
+      });
   }
 
   create() {
     if (!this.userName.value || !this.password.value) return;
 
-    const users = localStorage.getItem('food-shop-users');
+    this.userService
+      .getUserWithUsername(this.userName.value)
+      .subscribe((user) => {
+        if (user.length > 0) {
+          this.userName.setErrors({ usernameExist: true });
+          return;
+        } else {
+          // create new user & login
+          const user: User = {
+            id: new Date().getTime(),
+            username: this.userName.value,
+            password: this.password.value,
+            isAdmin: 0,
+          };
+          this.userService.addUser(user).subscribe(() => {
+            this.userService.login(user).subscribe(() => {
+              this.route.navigate(['']);
+            });
+          });
+        }
+      });
+  }
 
-    if (!users) {
-      localStorage.setItem(
-        'food-shop-users',
-        JSON.stringify([
-          { username: this.userName.value, password: this.password.value },
-        ])
-      );
+  checkAdminLogin() {
+    if (this.userName.value === 'admin' && this.password.value === 'admin') {
+      const user = {
+        id: 0,
+        username: 'admin',
+        password: 'admin',
+        isAdmin: 1,
+      };
+      this.userService.login(user).subscribe();
       this.route.navigate(['']);
-    } else {
-      const parsedUsers: { username: string; password: string }[] =
-        JSON.parse(users);
-
-      const isUsernameExist = parsedUsers.find(
-        (item) => item.username === this.userName.value
-      );
-
-      if (isUsernameExist) {
-        this.userName.setErrors({ usernameExist: true });
-        return;
-      } else {
-        localStorage.setItem(
-          'food-shop-users',
-          JSON.stringify([
-            ...parsedUsers,
-            { username: this.userName.value, password: this.password.value },
-          ])
-        );
-        this.route.navigate(['']);
-      }
     }
   }
 

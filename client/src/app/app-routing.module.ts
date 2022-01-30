@@ -28,6 +28,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./add-dish/add-dish.module').then((m) => m.AddDishModule),
   },
+  {
+    path: 'edit/:id',
+    loadChildren: () =>
+      import('./edit-dish/edit-dish.module').then((m) => m.EditDishModule),
+  },
   { path: '', component: HomeComponent },
   { path: '**', component: NotFoundComponent },
 ];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartItem } from '../service/cart.service';
+import { Food } from '../service/cart.service';
 import { FoodService } from '../service/foods.service';
 import { UserService } from '../service/user.service';
 
@@ -9,7 +9,7 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  foods: CartItem[];
+  foods: Food[] = [];
 
   imagesForSlider = [
     { path: 'assets/food-1.jpg' },
@@ -20,9 +20,11 @@ export class HomeComponent implements OnInit {
   constructor(
     private foodService: FoodService,
     public userService: UserService
-  ) {
-    this.foods = foodService.foods;
-  }
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.foodService.getFoods().subscribe((food) => {
+      this.foods = food;
+    });
+  }
 }

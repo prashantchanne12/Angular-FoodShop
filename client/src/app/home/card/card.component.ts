@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CartItem, CartService } from 'src/app/service/cart.service';
+import { Food, CartService } from 'src/app/service/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-card',
@@ -8,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./card.component.css'],
 })
 export class CardComponent implements OnInit {
-  @Input() food: CartItem = {
+  @Input() food: Food = {
     quantity: 1,
     id: 0,
     name: '',
@@ -18,11 +19,11 @@ export class CardComponent implements OnInit {
     category: [''],
     total: 0,
   };
-  @Input() isAdmin: boolean = false;
+  @Input() isAdmin: boolean | Subscription = false;
 
   addedToCart = false;
   quantity = 0;
-  foodItem: CartItem = {
+  foodItem: Food = {
     quantity: 1,
     id: 0,
     name: '',
@@ -39,7 +40,7 @@ export class CardComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {}
 
-  onAddToCart(item: CartItem) {
+  onAddToCart(item: Food) {
     this.addedToCart = true;
     this._snackBar.open(`${this.food.name} added to bag ✅`, '', {
       duration: 3000,

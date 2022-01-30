@@ -1,4 +1,4 @@
-import { CartItem } from './cart.service';
+import { Food } from './cart.service';
 
 export class OrdersService {
   constructor() {
@@ -9,9 +9,9 @@ export class OrdersService {
     }
   }
 
-  orders: CartItem[] = [];
+  orders: Food[] = [];
 
-  addOrders(orders: CartItem[]) {
+  addOrders(orders: Food[]) {
     this.orders = [...this.orders, ...orders];
 
     // local storage

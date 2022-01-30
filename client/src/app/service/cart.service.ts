@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartLocalService } from './cart.local.service';
 
-export interface CartItem {
+export interface Food {
   id: number;
   name: string;
   imgUrl: string;
@@ -20,10 +20,10 @@ export class CartService {
     }
   }
 
-  cart: CartItem[] = [];
+  cart: Food[] = [];
   addedToCart = false;
 
-  addToCart(item: CartItem) {
+  addToCart(item: Food) {
     this.addedToCart = true;
 
     const index = this.cart.findIndex((c) => c.id === item.id);
@@ -38,7 +38,7 @@ export class CartService {
     }
   }
 
-  removeFromCart(item: CartItem) {
+  removeFromCart(item: Food) {
     this.cart = this.cart.filter((c) => c.id !== item.id);
     this.cartLocalService.setNewCart(this.cart);
   }

@@ -1,13 +1,13 @@
-import { CartItem } from './cart.service';
+import { Food } from './cart.service';
 
 export class CartLocalService {
-  addCartItemToLocalStorage(item: CartItem) {
+  addCartItemToLocalStorage(item: Food) {
     const cartItems = localStorage.getItem('cartItems');
 
     if (!cartItems) {
       localStorage.setItem('cartItems', JSON.stringify([item]));
     } else {
-      const parsedCartItem: CartItem[] = JSON.parse(cartItems);
+      const parsedCartItem: Food[] = JSON.parse(cartItems);
 
       parsedCartItem.push(item);
 
@@ -15,7 +15,7 @@ export class CartLocalService {
     }
   }
 
-  setNewCart(cart: CartItem[]) {
+  setNewCart(cart: Food[]) {
     localStorage.setItem('cartItems', JSON.stringify(cart));
   }
 
