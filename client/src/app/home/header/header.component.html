@@ -5,16 +5,14 @@
             <button routerLink="" mat-icon-button>
                 <mat-icon>home</mat-icon>
             </button>
-            <button *ngIf="!userService.getIsAdmin()" routerLink="/cart" mat-icon-button
-                matBadge={{cartService.getCartCount()}} [matBadgeHidden]="cartService.getCartCount() === 0"
-                matBadgeColor="warn" matBadgeOverlap="true">
+            <button *ngIf="!isUserAdmin" routerLink="/cart" mat-icon-button matBadge={{cartService.cartItemCount}}
+                [matBadgeHidden]="false" matBadgeColor="warn" matBadgeOverlap="true">
                 <mat-icon>shopping_cart</mat-icon>
             </button>
-            <button *ngIf="!userService.getIsAdmin() && isUser" color="primary" routerLink="/orders" class="btn"
-                mat-flat-button>
+            <button *ngIf="!isUserAdmin && isUser" color="primary" routerLink="/orders" class="btn" mat-flat-button>
                 Orders
             </button>
-            <button *ngIf="userService.getIsAdmin()" routerLink="/add" class="btn" mat-raised-button>
+            <button *ngIf="isUserAdmin" routerLink="/add" class="btn" mat-raised-button>
                 Add new dish
             </button>
             <button color="primary" routerLink="/login" class="btn" *ngIf="!isUser" mat-flat-button>

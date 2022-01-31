@@ -9,23 +9,31 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class HeaderComponent implements OnInit {
   isUser = false;
+  isUserAdmin = false;
+  userId: number = 1111;
 
   constructor(
     public cartService: CartService,
     public userService: UserService
-  ) {
-    console.log(userService.getIsAdmin());
-  }
+  ) {}
 
   ngOnInit(): void {
-    const currentUser = localStorage.getItem('current-food-shop-user');
-    if (currentUser) {
-      this.isUser = true;
-    }
+    this.userService.getCurrentUser().subscribe((user) => {
+      if (user.length > 0) {
+        this.isUser = true;
+        this.userId = user[0].id;
+
+        if (user[0].isAdmin) {
+          this.isUserAdmin = true;
+        }
+      }
+    });
   }
 
   onLogout() {
-    localStorage.removeItem('current-food-shop-user');
-    this.isUser = false;
+    this.userService.logout(this.userId).subscribe(() => {
+      this.isUser = false;
+      this.cartService.emptyCart();
+    });
   }
 }

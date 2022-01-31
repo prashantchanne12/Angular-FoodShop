@@ -15,6 +15,6 @@
     </div>
 
     <!-- cards -->
-    <app-card *ngFor="let food of foods" [food]="food" [isAdmin]="userService.getIsAdmin()"></app-card>
+    <app-card *ngFor="let food of foods" [food]="food" [isAdmin]="isAdmin"></app-card>
 
 </div>

@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Services
 import { CartService } from './service/cart.service';
-import { CartLocalService } from './service/cart.local.service';
+
 import { FoodService } from './service/foods.service';
 import { OrdersService } from './service/orders.service';
 import { UserService } from './service/user.service';
@@ -51,7 +51,7 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
   ],
   providers: [
-    // CartService,
+    CartService,
     // CartLocalService,
     // FoodService,
     // OrdersService,

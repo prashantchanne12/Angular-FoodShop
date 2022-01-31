@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CartLocalService } from './cart.local.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
+};
 
 export interface Food {
   id: number;
@@ -12,43 +19,63 @@ export interface Food {
   total: number;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CartService {
-  constructor(private cartLocalService: CartLocalService) {
-    if (cartLocalService.getCartItemsFromLocalStorage()) {
-      this.cart = cartLocalService.getCartItemsFromLocalStorage();
-    }
-  }
-
   cart: Food[] = [];
-  addedToCart = false;
+  private apiUrl = 'http://localhost:5000/cart';
+  cartItemCount = 0;
+
+  constructor(private http: HttpClient) {
+    this.getCart().subscribe((cart) => {
+      this.cartItemCount = cart.length;
+    });
+  }
 
   addToCart(item: Food) {
-    this.addedToCart = true;
+    this.getCartItem(item.id).subscribe((food) => {
+      if (food.length === 1) {
+        // update quantity & total
 
-    const index = this.cart.findIndex((c) => c.id === item.id);
+        const currentFood: Food = food[0];
 
-    if (index === -1) {
-      this.cart.push(item);
-      this.cartLocalService.addCartItemToLocalStorage(item);
-    } else {
-      this.cart[index].quantity = item.quantity;
-      this.cart[index].total = item.quantity * this.cart[index].price;
-      this.cartLocalService.setNewCart(this.cart);
-    }
+        currentFood.quantity = item.quantity;
+        currentFood.total = item.quantity * item.price;
+
+        const url = `${this.apiUrl}/${currentFood.id}`;
+        this.http.put<Food>(url, currentFood, httpOptions).subscribe();
+      } else {
+        // push to the cart
+        this.http
+          .post<Food>(this.apiUrl, item, httpOptions)
+          .subscribe(() => (this.cartItemCount += 1));
+      }
+    });
   }
 
-  removeFromCart(item: Food) {
-    this.cart = this.cart.filter((c) => c.id !== item.id);
-    this.cartLocalService.setNewCart(this.cart);
+  getCartItem(id: number): Observable<Food[]> {
+    const url = `${this.apiUrl}?id=${id}`;
+    return this.http.get<Food[]>(url);
   }
 
-  getCartCount(): number {
-    return this.cart.length;
+  removeFromCart(item: Food): Observable<Food> {
+    const url = `${this.apiUrl}/${item.id}`;
+    this.cartItemCount -= 1;
+    return this.http.delete<Food>(url);
+  }
+
+  getCart(): Observable<Food[]> {
+    return this.http.get<Food[]>(this.apiUrl);
   }
 
   emptyCart() {
-    this.cart = [];
-    this.cartLocalService.emptyCartLocal();
+    this.cartItemCount = 0;
+    this.http.get<Food[]>(this.apiUrl).subscribe((foods) => {
+      foods.forEach((food) => {
+        const url = `${this.apiUrl}/${food.id}`;
+        this.http.delete<Food>(url).subscribe();
+      });
+    });
   }
 }

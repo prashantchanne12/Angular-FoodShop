@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Food, CartService } from '../../service/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-cart-home',
@@ -11,52 +12,70 @@ export class CartHomeComponent implements OnInit {
   displayedColumns: string[] = ['name', 'quantity', 'price', 'remove'];
   subtotal = 0;
   currentUser = false;
+  cart: Food[] = [];
 
-  constructor(public cartService: CartService, private _snackBar: MatSnackBar) {
-    this.getNewSubtotal();
-    const user = localStorage.getItem('current-food-shop-user');
+  constructor(
+    public cartService: CartService,
+    private _snackBar: MatSnackBar,
+    private userService: UserService
+  ) {}
 
-    if (user) {
-      this.currentUser = true;
-    }
+  ngOnInit(): void {
+    this.cartService.getCart().subscribe((cart) => {
+      this.cart = cart;
+      this.getNewSubtotal();
+    });
+
+    this.userService.getCurrentUser().subscribe((user) => {
+      if (user) {
+        this.currentUser = true;
+      }
+    });
   }
-
-  ngOnInit(): void {}
 
   onQuantityAdd(item: Food) {
     item.quantity += 1;
+    item.total = item.quantity * item.price;
     this.cartService.addToCart(item);
     this.getNewSubtotal();
   }
 
   onQuantityRemove(item: Food) {
     item.quantity -= 1;
+    item.total = item.quantity * item.price;
 
     if (item.quantity === 0) {
-      this.cartService.removeFromCart(item);
-      this._snackBar.open(`${item.name} removed from bag`, '', {
-        duration: 3000,
+      this.cartService.removeFromCart(item).subscribe(() => {
+        this.updateUI(item);
+        this._snackBar.open(`${item.name} removed from bag`, '', {
+          duration: 3000,
+        });
+        this.getNewSubtotal();
       });
+    } else {
+      this.cartService.addToCart(item);
       this.getNewSubtotal();
-      return;
     }
-
-    this.cartService.addToCart(item);
-    this.getNewSubtotal();
   }
 
   onItemRemove(item: Food) {
-    this.cartService.removeFromCart(item);
-    this.getNewSubtotal();
-    this._snackBar.open(`${item.name} removed from bag`, '', {
-      duration: 3000,
+    this.cartService.removeFromCart(item).subscribe(() => {
+      this.getNewSubtotal();
+      this.updateUI(item);
+      this._snackBar.open(`${item.name} removed from bag`, '', {
+        duration: 3000,
+      });
     });
   }
 
   getNewSubtotal() {
     this.subtotal = 0;
-    this.cartService.cart.forEach((item) => {
+    this.cart.forEach((item) => {
       this.subtotal += item.total;
     });
+  }
+
+  updateUI(item: Food) {
+    this.cart = this.cart.filter((food) => food.id !== item.id);
   }
 }

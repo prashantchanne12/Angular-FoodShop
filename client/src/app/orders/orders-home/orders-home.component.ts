@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdersService } from 'src/app/service/orders.service';
+import { Food } from 'src/app/service/cart.service';
+import { Order, OrdersService } from 'src/app/service/orders.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-orders-home',
@@ -9,7 +11,22 @@ import { OrdersService } from 'src/app/service/orders.service';
 export class OrdersHomeComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'quantity', 'price'];
 
-  constructor(public ordersService: OrdersService) {}
+  orders: Food[] = [];
 
-  ngOnInit(): void {}
+  constructor(
+    public ordersService: OrdersService,
+    private userService: UserService
+  ) {}
+
+  ngOnInit(): void {
+    this.userService.getCurrentUser().subscribe((user) => {
+      this.ordersService.getOrders(user[0]).subscribe((order) => {
+        order.forEach((item) => {
+          item.orders.forEach((o) => {
+            this.orders.push(o);
+          });
+        });
+      });
+    });
+  }
 }

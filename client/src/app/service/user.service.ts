@@ -28,16 +28,17 @@ export class UserService {
     return this.http.post<User>(this.currentUser, user, httpOptions);
   }
 
-  logout(): Observable<User> {
-    return this.http.delete<User>(this.currentUser);
+  logout(id: number) {
+    const url = `${this.currentUser}/${id}`;
+    return this.http.delete(url);
   }
 
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.apiUrl, user, httpOptions);
   }
 
-  getCurrentUser(): Observable<User> {
-    return this.http.get<User>(this.currentUser);
+  getCurrentUser(): Observable<User[]> {
+    return this.http.get<User[]>(this.currentUser);
   }
 
   getUserWithUsername(username: string) {

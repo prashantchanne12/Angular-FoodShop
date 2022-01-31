@@ -10,6 +10,7 @@ import { UserService } from '../service/user.service';
 })
 export class HomeComponent implements OnInit {
   foods: Food[] = [];
+  isAdmin = false;
 
   imagesForSlider = [
     { path: 'assets/food-1.jpg' },
@@ -25,6 +26,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.foodService.getFoods().subscribe((food) => {
       this.foods = food;
+    });
+
+    this.userService.getCurrentUser().subscribe((user) => {
+      if (user.length > 0 && user[0].isAdmin) {
+        this.isAdmin = true;
+      }
     });
   }
 }
