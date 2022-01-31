@@ -21,15 +21,23 @@ export class FoodService {
     return this.http.get<Food[]>(this.apiUrl);
   }
 
+  // -------- ADMIN FUNCTIONS ----------
   addFood(food: Food): Observable<Food> {
     return this.http.post<Food>(this.apiUrl, food, httpOptions);
   }
 
-  // addNewFood(item: Food) {
-  //   this.foods.push(item);
-  // }
+  deleteFood(id: number): Observable<Food> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<Food>(url);
+  }
 
-  deleteFood(id: number) {}
+  getFoodById(id: number): Observable<Food> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<Food>(url);
+  }
 
-  editFood(id: number, data: string) {}
+  editFood(food: Food) {
+    const url = `${this.apiUrl}/${food.id}`;
+    return this.http.put<Food>(url, food, httpOptions);
+  }
 }

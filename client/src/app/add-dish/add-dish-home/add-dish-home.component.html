@@ -2,23 +2,27 @@
 
     <div class="grid-container">
         <div class="form-wrapper">
-            <h1>New dish</h1>
+            <h1 *ngIf="!edit">New dish</h1>
+            <h1 *ngIf="edit">Edit dish</h1>
             <div class="input-wrapper">
                 <mat-form-field appearance="outline">
                     <mat-label>Dish name</mat-label>
-                    <input autofocus matInput placeholder="ex. pizza" required [formControl]="name">
+                    <input autofocus matInput placeholder="ex. pizza" required [formControl]="name"
+                        value={{name.value}}>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Dish image URL</mat-label>
-                    <input autofocus matInput placeholder="add a image URL" required [formControl]="image">
+                    <input autofocus matInput placeholder="add a image URL" required [formControl]="image"
+                        value={{image.value}}>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Description</mat-label>
-                    <textarea matInput placeholder="description" required [formControl]="description"></textarea>
+                    <textarea matInput placeholder="description" required [formControl]="description"
+                        value={{description.value}}></textarea>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Category</mat-label>
-                    <mat-select required [formControl]="category">
+                    <mat-select required [formControl]="category" value={{category.value}}>
                         <mat-option *ngFor="let food of categories" [value]="food.value">
                             {{food.viewValue}}
                         </mat-option>
@@ -26,9 +30,15 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Price ₹</mat-label>
-                    <input type="number" autofocus matInput placeholder="₹" required [formControl]="price" />
+                    <input type="number" autofocus matInput placeholder="₹" required [formControl]="price"
+                        value={{price.value}} />
                 </mat-form-field>
-                <button style="padding: 3px;" mat-raised-button color="primary">ADD NEW DISH</button>
+                <button (click)="onAdd()"
+                    [disabled]="!name.value || !price.value || !category.value || !description.value || !image.value"
+                    style="padding: 3px;" mat-raised-button color="primary" *ngIf="!edit">ADD NEW DISH</button>
+                <button (click)="onEdit()"
+                    [disabled]="!name.value || !price.value || !category.value || !description.value || !image.value"
+                    style="padding: 3px;" mat-raised-button color="primary" *ngIf="edit">EDIT DISH</button>
             </div>
         </div>
         <div>

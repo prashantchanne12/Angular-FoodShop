@@ -15,7 +15,7 @@
         </button>
     </div>
     <div *ngIf="isAdmin" class="add-btn">
-        <button color="primary" mat-stroked-button>Edit</button>
+        <button color="primary" mat-stroked-button [routerLink]="['add', food.id]">Edit</button>
     </div>
 
     <!-- edit button here -->

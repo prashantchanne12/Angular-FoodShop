@@ -81,14 +81,16 @@
     {
       "id": 1,
       "name": "Corn Pizza",
-      "desc": "Corn pizza, hand tossed with extra cheeze",
-      "price": 250,
       "category": [
-        "Italian"
+        [
+          "Italian"
+        ]
       ],
+      "desc": "Corn pizza, hand tossed with extra cheeze",
       "imgUrl": "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/m/k/p43-15695730475d8dc8b749874.jpg?tr=tr:n-large",
+      "price": 300,
       "quantity": 1,
-      "total": 250
+      "total": 300
     },
     {
       "id": 2,
@@ -137,6 +139,30 @@
         "Indian"
       ],
       "total": 135
+    },
+    {
+      "id": 1643644318946,
+      "name": "Test",
+      "category": [
+        "Indian"
+      ],
+      "desc": "test 1",
+      "imgUrl": "https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900",
+      "price": 120,
+      "quantity": 1,
+      "total": 120
+    },
+    {
+      "id": 1643644827867,
+      "name": "Test 2",
+      "category": [
+        "Mexican"
+      ],
+      "desc": "test",
+      "imgUrl": "https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900",
+      "price": 120,
+      "quantity": 1,
+      "total": 120
     }
   ],
   "cart": []
