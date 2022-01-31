@@ -33,7 +33,7 @@ export class CheckoutHomeComponent implements OnInit {
 
   onPlaceOrder() {
     this.ordersService.addOrders(this.cart, this.user).subscribe();
-    // this.cartService.emptyCart();
+    this.cartService.emptyCart();
 
     const dialogRef = this.dialog.open(DialogComponet);
     setTimeout(() => {

@@ -103,8 +103,9 @@ export class LoginHomeComponent implements OnInit {
         password: 'admin',
         isAdmin: 1,
       };
-      this.userService.login(user).subscribe();
-      this.route.navigate(['']);
+      this.userService.login(user).subscribe(() => {
+        this.route.navigate(['']);
+      });
     }
   }
 

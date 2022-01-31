@@ -21,19 +21,18 @@ export class HeaderComponent implements OnInit {
     this.userService.getCurrentUser().subscribe((user) => {
       if (user.length > 0) {
         this.isUser = true;
-        this.userId = user[0].id;
-
         if (user[0].isAdmin) {
           this.isUserAdmin = true;
         }
+        this.userId = user[0].id;
       }
     });
   }
 
   onLogout() {
     this.userService.logout(this.userId).subscribe(() => {
-      this.isUser = false;
       this.cartService.emptyCart();
+      this.isUser = false;
     });
   }
 }
