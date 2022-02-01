@@ -13,10 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 // Services
 import { CartService } from './service/cart.service';
 
-import { FoodService } from './service/foods.service';
-import { OrdersService } from './service/orders.service';
-import { UserService } from './service/user.service';
-
 // Angular Material Components
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,6 +22,8 @@ import { CardComponent } from './home/card/card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './home/card/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
     HeaderComponent,
     NotFoundComponent,
     CardComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,14 +48,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatBadgeModule,
     MatSnackBarModule,
     HttpClientModule,
+    MatDialogModule,
   ],
-  providers: [
-    CartService,
-    // CartLocalService,
-    // FoodService,
-    // OrdersService,
-    // UserService,
-  ],
+  providers: [CartService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Food, CartService } from 'src/app/service/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
+import { FoodService } from 'src/app/service/foods.service';
 
 @Component({
   selector: 'app-card',
@@ -37,7 +40,9 @@ export class CardComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private _snackBar: MatSnackBar
+    private foodService: FoodService,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   onAddToCart(item: Food) {
@@ -68,6 +73,18 @@ export class CardComponent implements OnInit {
       return;
     }
     this.cartService.addToCart({ ...this.foodItem, quantity: this.quantity });
+  }
+
+  // ------- ADMIN FUNCTION -------
+  onDelete() {
+    const dialogRef = this.dialog.open(DialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.foodService.deleteFood(this.food.id).subscribe(() => {
+          window.location.reload();
+        });
+      }
+    });
   }
 
   ngOnInit(): void {}

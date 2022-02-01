@@ -1,0 +1,10 @@
+<div class="container">
+    <h2 mat-dialog-title>Delete dish</h2>
+    <mat-dialog-content class="mat-typography">
+        Are you sure you want to delete?
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button color="primary" mat-stroked-button mat-dialog-close>Cancel</button>
+        <button mat-flat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>Delete</button>
+    </mat-dialog-actions>
+</div>

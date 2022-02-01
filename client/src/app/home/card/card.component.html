@@ -1,4 +1,4 @@
-<mat-card class="card">
+<div class="card">
     <img [src]="food.imgUrl" class="card-img">
     <div class="content">
         <h2>{{food.name}}</h2>
@@ -15,9 +15,15 @@
         </button>
     </div>
     <div *ngIf="isAdmin" class="add-btn">
-        <button color="primary" mat-stroked-button [routerLink]="['add', food.id]">Edit</button>
+        <button mat-icon-button color="primary" [routerLink]="['add', food.id]">
+            <mat-icon color="primary">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDelete()">
+            <mat-icon color="warn">delete_outline</mat-icon>
+        </button>
+        <!-- <button color="primary" mat-stroked-button [routerLink]="['add', food.id]">Edit</button> -->
+        <!-- <button style="margin-left: 1rem;" mat-raised-button color="warn">Delete</button> -->
     </div>
-
     <!-- edit button here -->
 
     <div *ngIf="addedToCart" class="add-btn counter">
@@ -25,4 +31,4 @@
         <span class="qty">{{quantity}}</span>
         <button mat-button color="primary" class="btn-minus" (click)="onQuantityRemove()">-</button>
     </div>
-</mat-card>
+</div>

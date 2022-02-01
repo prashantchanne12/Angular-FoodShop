@@ -32,7 +32,9 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.userService.logout(this.userId).subscribe(() => {
       this.cartService.emptyCart();
+      window.location.reload();
       this.isUser = false;
+      this.isUserAdmin = false;
     });
   }
 }
