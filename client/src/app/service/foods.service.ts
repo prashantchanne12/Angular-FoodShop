@@ -14,11 +14,23 @@ const httpOptions = {
 })
 export class FoodService {
   private apiUrl = 'http://localhost:5000/foods';
+  private param = '';
 
   constructor(private http: HttpClient) {}
 
+  searchFood(search: string) {
+    this.param = search;
+  }
+
   getFoods(): Observable<Food[]> {
-    return this.http.get<Food[]>(this.apiUrl);
+    // return this.http.get<Food[]>(this.apiUrl);
+    const url = `${this.apiUrl}?q=${this.param}`;
+    return this.http.get<Food[]>(url);
+  }
+
+  getFoodsBySearch(param: string): Observable<Food[]> {
+    const url = `${this.apiUrl}?q=${param}`;
+    return this.http.get<Food[]>(url);
   }
 
   // -------- ADMIN FUNCTIONS ----------

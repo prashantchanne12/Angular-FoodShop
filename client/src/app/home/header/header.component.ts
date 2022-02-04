@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/service/cart.service';
+import { FoodService } from 'src/app/service/foods.service';
+import { SearchService } from 'src/app/service/search.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -14,7 +16,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public cartService: CartService,
-    public userService: UserService
+    public userService: UserService,
+    private foodService: FoodService,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -36,5 +40,9 @@ export class HeaderComponent implements OnInit {
       this.isUser = false;
       this.isUserAdmin = false;
     });
+  }
+
+  onSearch(event: any) {
+    this.searchService.setSearchTerm(event.target.value);
   }
 }

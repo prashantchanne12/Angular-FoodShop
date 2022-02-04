@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Food } from '../service/cart.service';
 import { FoodService } from '../service/foods.service';
+import { SearchService } from '../service/search.service';
 import { UserService } from '../service/user.service';
 
 @Component({
@@ -10,7 +11,9 @@ import { UserService } from '../service/user.service';
 })
 export class HomeComponent implements OnInit {
   foods: Food[] = [];
+  tempFood: Food[] = [];
   isAdmin = false;
+  searchTerm = '';
 
   imagesForSlider = [
     { path: 'assets/food-1.jpg' },
@@ -19,13 +22,26 @@ export class HomeComponent implements OnInit {
   ];
 
   constructor(
-    private foodService: FoodService,
-    public userService: UserService
-  ) {}
+    public foodService: FoodService,
+    public userService: UserService,
+    private searchService: SearchService
+  ) {
+    searchService.searchTerm.subscribe((term: string) => {
+      console.log('Term', term);
+      this.foods = this.tempFood.filter((item) =>
+        item.name.toLowerCase().includes(term.toLowerCase())
+      );
+    });
+  }
+
+  onSearch() {
+    console.log('hello world');
+  }
 
   ngOnInit(): void {
     this.foodService.getFoods().subscribe((food) => {
       this.foods = food;
+      this.tempFood = food;
     });
 
     this.userService.getCurrentUser().subscribe((user) => {

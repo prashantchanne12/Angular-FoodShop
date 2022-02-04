@@ -1,6 +1,12 @@
 <mat-toolbar class="mat-elevation-z2" style="position: sticky; top: 0; z-index: 100;" color="primary">
     <div class="navbar-wrapper container">
         <span routerLink="" style="cursor: pointer;">FoodShop</span>
+        <div class="search">
+            <input type="text" (input)="onSearch($event)" placeholder="Search dish">
+            <div class="search-icon">
+                <mat-icon style="padding-bottom: -10px;">search</mat-icon>
+            </div>
+        </div>
         <div class="buttons">
             <button routerLink="" mat-icon-button>
                 <mat-icon>home</mat-icon>

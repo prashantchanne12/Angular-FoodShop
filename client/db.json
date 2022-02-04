@@ -7,14 +7,7 @@
       "isAdmin": 0
     }
   ],
-  "curentUser": [
-    {
-      "id": 1,
-      "username": "admin",
-      "password": "admin",
-      "isAdmin": 1
-    }
-  ],
+  "curentUser": [],
   "orders": [
     {
       "id": 1643617539606,
@@ -143,5 +136,34 @@
       "total": 135
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "id": 5,
+      "name": "Masala Dosa",
+      "desc": "Sada Dosa, chutani, sambar",
+      "price": 135,
+      "imgUrl": "https://apollosugar.com/wp-content/uploads/2018/12/Masala-Dosa-1024x683.jpg",
+      "quantity": 2,
+      "category": [
+        "Indian"
+      ],
+      "total": 270
+    },
+    {
+      "id": 1,
+      "name": "Corn Pizza",
+      "category": [
+        [
+          [
+            "Italian"
+          ]
+        ]
+      ],
+      "desc": "Corn pizza, hand tossed with extra cheeze",
+      "imgUrl": "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/m/k/p43-15695730475d8dc8b749874.jpg?tr=tr:n-large",
+      "price": 250,
+      "quantity": 1,
+      "total": 250
+    }
+  ]
 }
