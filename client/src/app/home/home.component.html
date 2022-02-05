@@ -9,12 +9,30 @@
 
     <!-- title -->
     <div class="fresh-food">
-        <h2 *ngIf="!userService.getIsAdmin()">Order fresh food</h2>
-        <h2 *ngIf="userService.getIsAdmin()">Your dishes 🍕</h2>
-        <img *ngIf="!userService.getIsAdmin()" src="assets/carrot.svg" />
+        <div>
+            <h2 *ngIf="!userService.getIsAdmin()">Order fresh food</h2>
+            <h2 *ngIf="userService.getIsAdmin()">Your dishes 🍕</h2>
+            <img *ngIf="!userService.getIsAdmin()" src="assets/carrot.svg" />
+        </div>
+        <div>
+            <form>
+                <mat-form-field appearance="fill">
+                    <mat-label>Sort</mat-label>
+                    <mat-select (selectionChange)="onChange($event)" name="sort">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let option of sortOptions" [value]="option.value">
+                            {{option.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </div>
     </div>
 
     <!-- cards -->
     <app-card *ngFor="let food of foods" [food]="food" [isAdmin]="isAdmin"></app-card>
+    <div *ngIf="foods.length === 0 && !loading">
+        <h2 style="text-align: center; margin-top: 2rem; color: #5B33A1;">No dishes found :(</h2>
+    </div>
 
 </div>

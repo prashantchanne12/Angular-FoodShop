@@ -27,6 +27,7 @@ import { DialogComponent } from './home/card/dialog/dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
+    MatSelectModule,
   ],
   providers: [CartService],
   bootstrap: [AppComponent],
