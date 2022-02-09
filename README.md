@@ -1,7 +1,7 @@
 
 # Food Shop
 
-FoodShop app created with Angular with Material UI
+FoodShop app created using Angular with Material UI
 
 ### Install dependecies
 `npm install`
