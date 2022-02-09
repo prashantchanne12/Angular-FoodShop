@@ -10,8 +10,8 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class OrdersHomeComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'quantity', 'price'];
-
   orders: Food[] = [];
+  loading = true;
 
   constructor(
     public ordersService: OrdersService,
@@ -26,6 +26,7 @@ export class OrdersHomeComponent implements OnInit {
             this.orders.push(o);
           });
         });
+        this.loading = false;
       });
     });
   }

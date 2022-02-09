@@ -13,7 +13,14 @@
       "isAdmin": 0
     }
   ],
-  "curentUser": [],
+  "curentUser": [
+    {
+      "id": 1643548521934,
+      "username": "prashant",
+      "password": "hello",
+      "isAdmin": 0
+    }
+  ],
   "orders": [
     {
       "id": 1643617539606,
@@ -190,5 +197,18 @@
       "total": 135
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "id": 4,
+      "name": "Chana Masala",
+      "desc": "Chana masla, 1 bowl with gravy",
+      "price": 120,
+      "imgUrl": "https://www.seriouseats.com/thmb/HaBfNjG3Fr61qU6_1h9lHY_3Yl0=/1500x1125/filters:fill(auto,1)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2016__03__20160328-channa-masala-recipe-6-ae4913c04d5b43e9acef2917a74aa5fc.jpg",
+      "quantity": 1,
+      "category": [
+        "Indian"
+      ],
+      "total": 120
+    }
+  ]
 }

@@ -13,6 +13,7 @@ export class CartHomeComponent implements OnInit {
   subtotal = 0;
   currentUser = false;
   cart: Food[] = [];
+  loading = true;
 
   constructor(
     public cartService: CartService,
@@ -24,6 +25,7 @@ export class CartHomeComponent implements OnInit {
     this.cartService.getCart().subscribe((cart) => {
       this.cart = cart;
       this.getNewSubtotal();
+      this.loading = false;
     });
 
     this.userService.getCurrentUser().subscribe((user) => {

@@ -4,10 +4,15 @@
         <h2>Your Orders</h2>
     </header>
 
-    <div *ngIf="orders.length === 0" style="margin-top: 3rem;">
+    <div *ngIf="loading" style="display: flex; justify-content: center;">
+        <mat-spinner diameter="40"></mat-spinner>
+    </div>
+
+    <div *ngIf="orders.length === 0 && !loading" style="margin-top: 3rem;">
         <img src="assets/empty.svg" style="height: 300px; width: 100%; object-fit: contain;" />
         <h2 style="text-align: center; margin-top: 2.5rem;">No orders for now!</h2>
     </div>
+
 
     <span style="color: #fff;">{{orders[0].name}}</span>
 

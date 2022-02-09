@@ -7,6 +7,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [CartHomeComponent],
@@ -17,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatTableModule,
     MatButtonModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class CartModule {}
