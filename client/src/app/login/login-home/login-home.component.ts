@@ -54,19 +54,29 @@ export class LoginHomeComponent implements OnInit {
   login() {
     if (!this.userName.value || !this.password.value) return;
 
-    this.checkAdminLogin();
-
-    this.userService
-      .getUsernameWithPassword(this.userName.value, this.password.value)
-      .subscribe((user) => {
-        if (user.length === 1) {
-          this.userService.login(user[0]).subscribe(() => {
-            this.route.navigate(['']);
-          });
-        } else {
-          this.userName.setErrors({ invalidUserPass: true });
-        }
+    if (this.checkAdminLogin()) {
+      const user = {
+        id: 0,
+        username: 'admin',
+        password: 'admin',
+        isAdmin: 1,
+      };
+      this.userService.login(user).subscribe(() => {
+        this.route.navigate(['']);
       });
+    } else {
+      this.userService
+        .getUsernameWithPassword(this.userName.value, this.password.value)
+        .subscribe((user) => {
+          if (user.length === 1) {
+            this.userService.login(user[0]).subscribe(() => {
+              this.route.navigate(['']);
+            });
+          } else {
+            this.userName.setErrors({ invalidUserPass: true });
+          }
+        });
+    }
   }
 
   create() {
@@ -95,18 +105,11 @@ export class LoginHomeComponent implements OnInit {
       });
   }
 
-  checkAdminLogin() {
+  checkAdminLogin(): boolean {
     if (this.userName.value === 'admin' && this.password.value === 'admin') {
-      const user = {
-        id: 0,
-        username: 'admin',
-        password: 'admin',
-        isAdmin: 1,
-      };
-      this.userService.login(user).subscribe(() => {
-        this.route.navigate(['']);
-      });
+      return true;
     }
+    return false;
   }
 
   ngOnInit(): void {
