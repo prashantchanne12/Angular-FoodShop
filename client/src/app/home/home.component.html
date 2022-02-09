@@ -10,9 +10,11 @@
     <!-- title -->
     <div class="fresh-food">
         <div>
-            <h2 *ngIf="!userService.getIsAdmin()">Order fresh food</h2>
-            <h2 *ngIf="userService.getIsAdmin()">Your dishes 🍕</h2>
-            <img *ngIf="!userService.getIsAdmin()" src="assets/carrot.svg" />
+            <h2 *ngIf="isAdmin">Your dishes 🍕</h2>
+            <div *ngIf="!isAdmin" style="display: flex; align-items: center;">
+                <h2>Order fresh food</h2>
+                <img src="assets/carrot.svg" />
+            </div>
         </div>
         <div>
             <form>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FoodService } from 'src/app/service/foods.service';
 import { Food } from 'src/app/service/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-add-dish-home',
@@ -26,11 +27,14 @@ export class AddDishHomeComponent implements OnInit {
   price = new FormControl(0, [Validators.required, Validators.min(1)]);
   edit = false;
   id = 0;
+  isAdmin = false;
 
   constructor(
     private route: ActivatedRoute,
     private foodService: FoodService,
-    private _snackBar: MatSnackBar
+    private userService: UserService,
+    private _snackBar: MatSnackBar,
+    private _router: Router
   ) {}
 
   onAdd() {
@@ -82,6 +86,19 @@ export class AddDishHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // check if current user is admin
+    this.userService.getCurrentUser().subscribe((user) => {
+      if (user.length > 0) {
+        if (!user[0].isAdmin) {
+          this._router.navigate(['']);
+        } else {
+          this.isAdmin = true;
+        }
+      } else {
+        this._router.navigate(['/login']);
+      }
+    });
+
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.id = parseInt(id);

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Food } from 'src/app/service/cart.service';
 import { FoodService } from 'src/app/service/foods.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-edit-dish-home',
@@ -22,7 +23,12 @@ export class EditDishHomeComponent implements OnInit {
   };
   notFound = false;
 
-  constructor(private route: ActivatedRoute, public foodService: FoodService) {}
+  constructor(
+    private route: ActivatedRoute,
+    public foodService: FoodService,
+    private userService: UserService,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');

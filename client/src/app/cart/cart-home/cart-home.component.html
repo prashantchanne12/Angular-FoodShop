@@ -4,8 +4,15 @@
         <h1 class="mat-display-1">Bag</h1>
     </header>
 
+    <div *ngIf="cart.length === 0" style="margin-top: 3rem;">
+        <img src="assets/empty.svg" style="height: 300px; width: 100%; object-fit: contain;" />
+        <div style="margin-top: 2.5rem; display: flex;justify-items: center; justify-content: center; font-size: 1rem;">
+            <p>Bag is empty :(</p>
+            <a routerLink="" style="padding-left:1rem;">Shop now</a>
+        </div>
+    </div>
 
-    <div class="grid-container">
+    <div class="grid-container" *ngIf="cart.length > 0">
         <div>
             <table mat-table [dataSource]="cart" class="mat-elevation-z2">
                 <ng-container matColumnDef="position">

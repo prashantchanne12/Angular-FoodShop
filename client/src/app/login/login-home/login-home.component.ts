@@ -109,5 +109,11 @@ export class LoginHomeComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.getCurrentUser().subscribe((user) => {
+      if (user.length > 0) {
+        this.route.navigate(['']);
+      }
+    });
+  }
 }

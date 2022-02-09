@@ -1,6 +1,6 @@
 <div class="container">
 
-    <div class="grid-container">
+    <div *ngIf="isAdmin" class="grid-container">
         <div class="form-wrapper">
             <h1 *ngIf="!edit">New dish</h1>
             <h1 *ngIf="edit">Edit dish</h1>

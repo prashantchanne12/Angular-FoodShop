@@ -27,7 +27,7 @@ export class CartHomeComponent implements OnInit {
     });
 
     this.userService.getCurrentUser().subscribe((user) => {
-      if (user) {
+      if (user.length > 0) {
         this.currentUser = true;
       }
     });

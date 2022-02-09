@@ -4,6 +4,11 @@
         <h2>Your Orders</h2>
     </header>
 
+    <div *ngIf="orders.length === 0" style="margin-top: 3rem;">
+        <img src="assets/empty.svg" style="height: 300px; width: 100%; object-fit: contain;" />
+        <h2 style="text-align: center; margin-top: 2.5rem;">No orders for now!</h2>
+    </div>
+
     <span style="color: #fff;">{{orders[0].name}}</span>
 
     <table mat-table [dataSource]="orders" class="mat-elevation-z2">
