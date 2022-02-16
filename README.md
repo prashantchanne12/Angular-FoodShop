@@ -4,9 +4,12 @@
 FoodShop app created using Angular with Material UI
 
 
-### Demo
+## Demo
 
+#### Client
 ![client](https://github.com/prashantchanne12/Angular-FoodShop/blob/main/client/screenshots/client.gif)
+
+---
 
 #### Admin
 ![admin](https://github.com/prashantchanne12/Angular-FoodShop/blob/main/client/screenshots/admin.gif)
