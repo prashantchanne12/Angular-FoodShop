@@ -13,14 +13,7 @@
       "isAdmin": 0
     }
   ],
-  "curentUser": [
-    {
-      "id": 1643548521934,
-      "username": "prashant",
-      "password": "hello",
-      "isAdmin": 0
-    }
-  ],
+  "curentUser": [],
   "orders": [
     {
       "id": 1643617539606,
