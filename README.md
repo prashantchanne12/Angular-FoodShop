@@ -3,6 +3,16 @@
 
 FoodShop app created using Angular with Material UI
 
+
+### Demo
+
+![GitHub Logo](https://github.com/prashantchanne12/Angular-FoodShop/blob/main/client/screenshots/client.gif)
+
+#### Admin
+https://github.com/prashantchanne12/Angular-FoodShop/blob/main/client/screenshots/admin.gif
+
+---
+
 ### Install dependecies
 `npm install`
 
@@ -16,8 +26,3 @@ FoodShop app created using Angular with Material UI
 ### Run app
 `npm start`
 
----
-
-### Demo
-
-![GitHub Logo](https://github.com/prashantchanne12/Angular-FoodShop/blob/main/client/screenshots/client.gif)
