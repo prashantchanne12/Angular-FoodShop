@@ -13,7 +13,14 @@
       "isAdmin": 0
     }
   ],
-  "curentUser": [],
+  "curentUser": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin",
+      "isAdmin": 1
+    }
+  ],
   "orders": [
     {
       "id": 1643617539606,
@@ -109,6 +116,36 @@
       "id": 1644074558642,
       "userId": 1644073405871,
       "orders": [
+        {
+          "id": 3,
+          "name": "Sada Dosa",
+          "desc": "Sada Dosa, chutani, sambar",
+          "price": 100,
+          "imgUrl": "https://vismaifood.com/storage/app/uploads/public/8b4/19e/427/thumb__700_0_0_0_auto.jpg",
+          "quantity": 1,
+          "category": [
+            "Indian"
+          ],
+          "total": 100
+        }
+      ]
+    },
+    {
+      "id": 1645028407924,
+      "userId": 1643548521934,
+      "orders": [
+        {
+          "id": 2,
+          "name": "Pav Bhaji",
+          "desc": "Pav bhaji, 2 pav with extra butter",
+          "price": 120,
+          "category": [
+            "Indian"
+          ],
+          "imgUrl": "https://images.news18.com/ibnkhabar/uploads/2021/06/pav-bhaji.jpg",
+          "quantity": 2,
+          "total": 240
+        },
         {
           "id": 3,
           "name": "Sada Dosa",
